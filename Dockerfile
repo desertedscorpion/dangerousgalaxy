@@ -2,7 +2,7 @@ FROM taf7lwappqystqp4u7wjsqkdc7dquw/heavytombstone
 USER root
 ENV container="Docker" GIT_EMAIL="emory.merryman@gmail.com" GIT_NAME="Emory Merryman" ORGANIZATION="orgization" REPOSITORY="repository"
 VOLUME /var/private
-RUN dnf update --assumeyes && dnf install --assumeyes emacs git docker dbus sudo && dnf update --assumeyes && dnf clean all && dbus-uuidgen > /var/lib/dbus/machine-id && systemctl enable docker.service && echo "${LUSER} ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/${LUSER} && chmod 0444 /etc/sudoers.d/${LUSER}
+RUN dnf update --assumeyes && dnf install --assumeyes emacs git docker dbus sudo bash-completion && dnf update --assumeyes && dnf clean all && dbus-uuidgen > /var/lib/dbus/machine-id && systemctl enable docker.service && echo "${LUSER} ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/${LUSER} && chmod 0444 /etc/sudoers.d/${LUSER}
 RUN (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == systemd-tmpfiles-setup.service ] || rm -f $i; done); \
 rm -f /lib/systemd/system/multi-user.target.wants/*;\
 rm -f /etc/systemd/system/*.wants/*;\
