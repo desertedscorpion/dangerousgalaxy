@@ -14,4 +14,4 @@ rm -f /lib/systemd/system/anaconda.target.wants/*;
 VOLUME ["/sys/fs/cgroup"] 
 USER ${LUSER}
 RUN mkdir /home/${LUSER}/.ssh && chmod 0700 /home/${LUSER}/.ssh && git config --global user.email ${GIT_EMAIL} && git config --global user.name ${GIT_NAME}
-CMD cp /var/private/id_rsa /home/${LUSER}/.ssh/id_rsa && chmod 0600 /home/${LUSER}/.ssh/id_rsa && git clone git@github.com/${ORGANIZATION}/${REPOSITORY}.git /usr/bin/bash
+CMD cp /var/private/id_rsa /home/${LUSER}/.ssh/id_rsa && chmod 0600 /home/${LUSER}/.ssh/id_rsa && git clone git@github.com:${ORGANIZATION}/${REPOSITORY}.git /usr/bin/bash
