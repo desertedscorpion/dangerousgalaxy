@@ -1,6 +1,6 @@
 FROM taf7lwappqystqp4u7wjsqkdc7dquw/heavytombstone
 USER root
-ENV GIT_EMAIL="emory.merryman@gmail.com" GIT_NAME="Emory Merryman" container="Docker"
+ENV container="Docker" GIT_EMAIL="emory.merryman@gmail.com" GIT_NAME="Emory Merryman" ORGANIZATION="orgization" REPOSITORY="repository"
 VOLUME /var/private
 RUN dnf update --assumeyes && dnf install --assumeyes emacs git docker dbus sudo && dnf update --assumeyes && dnf clean all && dbus-uuidgen > /var/lib/dbus/machine-id &&  echo "${LUSER} ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/${LUSER} && chmod 0444
 RUN (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == systemd-tmpfiles-setup.service ] || rm -f $i; done); \
@@ -14,4 +14,4 @@ rm -f /lib/systemd/system/anaconda.target.wants/*;
 VOLUME ["/sys/fs/cgroup"] 
 USER ${LUSER}
 RUN mkdir /home/${LUSER}/.ssh && chmod 0700 /home/${LUSER}/.ssh && git config --global user.email ${GIT_EMAIL} && git config --global user.name ${GIT_NAME}
-CMD cp /var/private/id_rsa /home/${LUSER}/.ssh/id_rsa && chmod 0600 /home/${LUSER}/.ssh/id_rsa && /usr/bin/bash
+CMD cp /var/private/id_rsa /home/${LUSER}/.ssh/id_rsa && chmod 0600 /home/${LUSER}/.ssh/id_rsa && git clone git@github.com/${ORGANIZATION}/${REPOSITORY}.git /usr/bin/bash
